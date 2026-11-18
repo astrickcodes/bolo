@@ -1,82 +1,149 @@
-<!doctype html><html lang=en><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Bolo – बोलो</title>
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Bolo – Angika · Bajjika · Magahi</title>
+<meta name=theme-color content="#1b1233"><meta name=description content="Learn Angika, Bajjika and Magahi for talking with family.">
+<link rel=manifest href=manifest.json><link rel=icon href=icon-192.png><link rel=apple-touch-icon href=icon-180.png>
+<meta name=apple-mobile-web-app-capable content=yes><meta name=mobile-web-app-capable content=yes>
+<meta name=apple-mobile-web-app-status-bar-style content=black-translucent><meta name=apple-mobile-web-app-title content=Bolo>
 <style>
-:root{--bg:#1b1233;--card:#2a1d4d;--ink:#fff4e0;--mut:#b9a9e0;--a:#ff9f1c;--b:#2ec4b6;--c:#ff4d6d;--ok:#7bd88f}
-*{box-sizing:border-box}body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;
-background-image:radial-gradient(circle at 15% 0,#3b2575 0,transparent 45%),radial-gradient(circle at 100% 100%,#5a1f4a 0,transparent 40%)}
-.w{max-width:480px;margin:auto;padding:14px 14px 80px}
-.bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+:root{--bg:#1b1233;--card:#2a1d4d;--ink:#fff4e0;--mut:#b9a9e0;--a:#ff9f1c;--b:#2ec4b6;--c:#ff4d6d;--ok:#7bd88f;--lc:#ff9f1c}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:system-ui,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;
+background-image:radial-gradient(circle at 15% 0,#3b2575 0,transparent 45%),radial-gradient(circle at 100% 100%,#5a1f4a 0,transparent 40%);background-attachment:fixed}
+.w{max-width:480px;margin:auto;padding:max(14px,env(safe-area-inset-top)) 14px 90px}
+button{font:inherit;color:inherit}
+.bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
 .logo{font-size:26px;font-weight:800;letter-spacing:1px}.logo span{color:var(--a)}
-.pill{background:#ffffff1a;border-radius:20px;padding:5px 12px;font-weight:700;font-size:14px;margin-left:6px}
-.tabs{display:flex;gap:8px;margin:12px 0}
-.tab{flex:1;padding:12px 4px;border-radius:14px;border:2px solid transparent;background:var(--card);color:var(--ink);font-weight:700;font-size:15px;cursor:pointer}
-.tab.on{border-color:var(--lc);box-shadow:0 0 18px -4px var(--lc);background:linear-gradient(160deg,var(--card),#3a2a66)}
+.pill{background:#ffffff1a;border-radius:20px;padding:6px 12px;font-weight:700;font-size:14px;margin-left:6px;border:0;cursor:pointer}
+.tabs{display:flex;gap:8px;margin:10px 0}
+.tab{flex:1;padding:11px 4px;border-radius:14px;border:2px solid transparent;background:var(--card);font-weight:700;font-size:15px;cursor:pointer}
+.tab.on{border-color:var(--tc);box-shadow:0 0 18px -4px var(--tc);background:linear-gradient(160deg,var(--card),#3a2a66)}
 .tab small{display:block;font-weight:400;color:var(--mut);font-size:11px}
-.border{height:12px;margin:6px 0 14px;background:repeating-linear-gradient(90deg,var(--a) 0 10px,transparent 10px 14px,var(--b) 14px 24px,transparent 24px 28px,var(--c) 28px 38px,transparent 38px 42px);border-radius:6px;opacity:.85}
+.border{height:10px;margin:4px 0 14px;background:repeating-linear-gradient(90deg,var(--a) 0 10px,transparent 10px 14px,var(--b) 14px 24px,transparent 24px 28px,var(--c) 28px 38px,transparent 38px 42px);border-radius:6px;opacity:.85}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.tile{background:var(--card);border-radius:18px;padding:16px;cursor:pointer;position:relative;overflow:hidden;transition:.15s;border:1px solid #ffffff14}
-.tile:active{transform:scale(.96)}.tile .e{font-size:34px}.tile b{display:block;margin-top:6px}.tile small{color:var(--mut)}
-.prog{height:6px;background:#ffffff22;border-radius:4px;margin-top:8px}.prog i{display:block;height:100%;background:var(--lc);border-radius:4px}
-.card{background:var(--card);border-radius:22px;padding:22px;margin:10px 0;border:1px solid #ffffff1a}
-.flip{perspective:900px;height:260px;cursor:pointer}.fi{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
-.flip.f .fi{transform:rotateY(180deg)}.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;padding:20px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-.front{background:linear-gradient(145deg,#3a2a66,#2a1d4d);border:1px solid #ffffff22}.back{transform:rotateY(180deg);background:linear-gradient(145deg,var(--lc),#00000055);color:#fff}
-.hi{font-size:30px;font-weight:700}.en{color:var(--mut);margin-top:6px}.ans{font-size:30px;font-weight:800}.alt{font-size:14px;opacity:.85;margin-top:10px}
+.tile{background:var(--card);border-radius:18px;padding:15px;cursor:pointer;border:1px solid #ffffff14;text-align:left;transition:.15s}
+.tile:active{transform:scale(.96)}.tile .e{font-size:32px}.tile b{display:block;margin-top:6px}.tile small{color:var(--mut)}
+.tile.wide{grid-column:span 2;background:linear-gradient(120deg,var(--lc),#00000066);color:#fff;display:flex;align-items:center;gap:14px}
+.tile.wide small{color:#ffffffcc}.prog{height:6px;background:#ffffff22;border-radius:4px;margin-top:8px}.prog i{display:block;height:100%;background:var(--lc);border-radius:4px;transition:width .4s}
+.card{background:var(--card);border-radius:20px;padding:20px;margin:10px 0;border:1px solid #ffffff1a}
+.flip{perspective:900px;min-height:270px;cursor:pointer;display:grid}
+.fi{grid-area:1/1;display:grid;transition:transform .5s;transform-style:preserve-3d}
+.flip.f .fi{transform:rotateY(180deg)}
+.face{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:22px;padding:22px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:270px}
+.front{background:linear-gradient(145deg,#3a2a66,#2a1d4d);border:1px solid #ffffff22}
+.back{transform:rotateY(180deg);background:linear-gradient(145deg,var(--lc),#000000aa);color:#fff}
+.hi{font-size:28px;font-weight:700;line-height:1.3}.en{color:var(--mut);margin-top:6px}.ans{font-size:30px;font-weight:800;line-height:1.25;word-break:break-word}
+.alt{font-size:13px;opacity:.9;margin-top:14px;text-align:left;width:100%}.alt div{margin:3px 0}
 .btn{border:0;border-radius:14px;padding:13px 18px;font-weight:800;font-size:16px;cursor:pointer;color:#1b1233;background:var(--a);margin:4px;box-shadow:0 4px 0 #0004}
 .btn:active{transform:translateY(3px);box-shadow:none}.btn.g{background:#ffffff22;color:var(--ink)}
-.opt{display:block;width:100%;text-align:left;background:#ffffff14;color:var(--ink);border:2px solid #ffffff22;border-radius:14px;padding:14px;margin:8px 0;font-size:17px;cursor:pointer}
+.opt{display:block;width:100%;text-align:left;background:#ffffff14;border:2px solid #ffffff22;border-radius:14px;padding:14px;margin:8px 0;font-size:17px;cursor:pointer}
 .opt.ok{background:#1f6b3a;border-color:var(--ok)}.opt.no{background:#7a1f3a;border-color:var(--c)}
 .cmp{background:var(--card);border-radius:16px;padding:14px;margin:10px 0}.cmp .row{display:flex;gap:8px;align-items:baseline;margin:6px 0}
-.cmp .l{width:62px;font-size:12px;font-weight:800;padding:3px 0;text-align:center;border-radius:8px;color:#1b1233}
-.fact{background:#ffffff12;border-left:4px solid var(--b);padding:12px;border-radius:10px;font-size:14px;color:var(--mut);margin-top:16px}
-.back-b{color:var(--mut);cursor:pointer;margin:6px 0;display:inline-block}
-.top{display:flex;justify-content:space-between;color:var(--mut);font-size:14px}
-#toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--ok);color:#12301c;padding:10px 20px;border-radius:30px;font-weight:800;opacity:0;transition:.3s;pointer-events:none}
-#toast.s{opacity:1}
-a{color:var(--b)}
-</style>
-<div class=w id=app></div><div id=toast></div>
+.cmp .l{flex:none;width:44px;font-size:11px;font-weight:800;padding:3px 0;text-align:center;border-radius:8px;color:#1b1233}.cmp .row span:last-child{word-break:break-word}
+.fact{background:#ffffff12;border-left:4px solid var(--b);padding:12px;border-radius:10px;font-size:14px;color:var(--mut);margin-top:14px;line-height:1.45}
+.back-b{color:var(--mut);cursor:pointer;background:none;border:0;padding:8px 0;font-size:15px}
+.top{display:flex;justify-content:space-between;color:var(--mut);font-size:14px;margin:6px 0}
+#toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--ok);color:#12301c;padding:10px 20px;border-radius:30px;font-weight:800;opacity:0;transition:.3s;pointer-events:none;z-index:9}
+#toast.s{opacity:1}a{color:var(--b)}h3{margin:18px 0 4px}
+.empty{color:var(--mut);text-align:center;padding:24px}.hint{font-size:12px;opacity:.8;margin-top:16px}
+input.s{width:100%;padding:12px;border-radius:12px;border:1px solid #ffffff33;background:#ffffff12;color:var(--ink);font-size:16px;margin:8px 0}
+.inst{background:linear-gradient(120deg,#2ec4b6,#1b7a8c);color:#06232a;border-radius:16px;padding:12px 14px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:700;font-size:14px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body><div class=w id=app></div><div id=toast role=status></div>
 <script>
-const T={"Words": ["🔤", "Pronouns & verbs", [["I", "मैं", "Hum", "Ham", "Hum"], ["He / She", "वह", "Uoo", "U", "Oo"], ["You", "तुम", "Tou", "Tu", "Tu"], ["Come", "आओ", "Aaooni", "Aa", "Aau"], ["Sit", "बैठो", "Baithni", "Baith", "Baith"], ["Eat", "खाओ", "Khooni", "Kho", "Kho"], ["Go", "जाओ", "Joni", "Jo", "Jo"], ["Walk", "चलो", "Chalni", "Chal", "Chal"], ["Drink", "पियो", "Peele", "Pi", "Peele"], ["Run", "दौड़ो", "Daud", "Daud", "Daur"]]], "Greet": ["🙏", "Greetings", [["How are you?", "आप कैसे हैं?", "Toharo ki haal?", "Tu kaisan chhe?", "Kaisan hen?"], ["I am fine.", "मैं ठीक हूँ।", "Hammein theek chhiye.", "Ham thik chhi.", "Hum theek hai."], ["What is your name?", "आपका नाम क्या है?", "Toharo naam ki choh?", "Tohar kathi naam hau?", "Tohar naam kauchi hau?"], ["Did you have lunch?", "खाना खाया?", "Ki toinh dopahar ke khana khailo?", "Tu dupahar ke khana kha lelahi?", "Tu duphar ke khana khaini?"]]], "Family": ["👨‍👩‍👧", "With family", [["Will you come with me?", "मेरे साथ आओगे?", "Ki toih hamra saathein aibho?", "Tu hamra sathe aaibe ki?", "Tu hamra saath aime?"], ["I shall come with you.", "मैं तुम्हारे साथ आऊँगा।", "Hamme tohra saathein aaibha.", "Ham tora sathe abau.", "Hum tohra saath aibau."], ["Will you give me your pen?", "अपनी कलम दोगे?", "Ki toinh aapno kalam hamra debho?", "Tu appan kalam hamra debe?", "Tu apan kalamiya hamra deme?"], ["Yes, of course.", "हाँ, ज़रूर।", "Haan, zaroor.", "Ha jarur.", "Haa, jaroor."], ["Do you love me?", "क्या तुम मुझसे प्यार करते हो?", "Ki Toinh hamra pyar karein chhay?", "Tu hamra se pyaar karai chhe?", "Tu hamra se prem karahen?"], ["Yes, I love you.", "हाँ, मैं तुमसे प्यार करता हूँ।", "Haan, hamme tohra pyar karein chhiyo.", "Ha, ham tora se pyar karai chhiyau.", "Haa, hum tohra se prem kara hu."]]], "Ask": ["❓", "Questions", [["Why did you come?", "तुम क्यों आए?", "Tau kathilah aaylo cheleh?", "Tu kathi la aile ha?", "Kahela aile hal?"], ["How did you come?", "तुम कैसे आए?", "Tau kainah aayle?", "Tu kaeese ailahi?", "Kaise ailin?"], ["Where did you sleep?", "तुम कहाँ सोए?", "Tau kahan suttalo cheleh?", "Tu kenne sutalahi?", "Kaha sutlahin?"], ["Where did you come from?", "तुम कहाँ से आए?", "Tau kahan sah aayloh cheh?", "Tu kanha se abai chhahi?", "Kaha se aawith hai?"], ["Where should I go?", "मैं कहाँ जाऊँ?", "Hummah kahan jaiyah?", "Hamra kanha jae ke chahi?", "Hamra kaha jai ke chahi?"], ["Which way did you come?", "किस रास्ते से आए?", "Kaun rasta sah tau aayleh?", "Tu kon rasta se ailahi?", "Kon rastaiya se alhin?"], ["How much did he pay you?", "उसने तुम्हें कितना दिया?", "Uoo tohra kitna delko?", "U tora ketana paisa delau?", "Oo tora ketna paisa delkau?"], ["What did you do?", "तुमने क्या किया?", "Tau ki kari dehleh?", "Tu kathi kaile?", "Tu kauchi kani?"], ["What should I do?", "मैं क्या करूँ?", "Hummara ki karma chahiyo?", "Ham kathi karu?", "Hame kauchi kari?"]]], "Tense": ["⏳", "Past & future", [["He ate an apple.", "उसने सेब खाया।", "Uoo ago seb khailke.", "U seb kha lelakai.", "Oo seu khail kai."], ["He has eaten.", "उसने खा लिया है।", "Uoo khay lelkey.", "U kha lelakai.", "Oo kha lelkai."], ["He slept the whole night.", "वह रात भर सोया।", "Uoo raat bhar suttalo cheleh.", "U rat bhar sutalai.", "Oo raat bhar sutalkai."], ["She came by bus yesterday.", "वह कल बस से आई।", "Uoo kal bus se aailey.", "U kalhe bas se alai.", "Oo kalhe bus se ailai."], ["He will eat.", "वह खाएगा।", "Uoo khaiyteh.", "U khatai.", "Oo khaitai."], ["He will go.", "वह जाएगा।", "Uoo jaiyteh.", "U jatai.", "Oo jaitai."], ["He will come.", "वह आएगा।", "Uoo aaiyteh.", "U atai.", "Oo aitau."]]]},FACTS=["Angika is also called Anga, or 'Chhika-Chhiki' – the nickname comes from its words for 'is' (chhik).", "Bajjika has historically been written in Kaithi script as well as Devanagari.", "Angika is spoken around Bhagalpur, Banka, Munger and parts of Jharkhand – and also in the Nepal Terai.", "Magahi (Magadhi) comes from the old Magadha region – Patna, Gaya, Nalanda.", "All three are close to Maithili; learn one and the others get easier."];
-const LN=[['Angika','Anga · Bhagalpur','#ff9f1c',2],['Bajjika','North Bihar','#2ec4b6',3],['Magahi','Magadh · Patna/Gaya','#ff4d6d',4]];
-let S=JSON.parse(localStorage.bolo||'{"xp":0,"streak":0,"day":"","mast":{},"ed":{}}');
-const save=()=>localStorage.bolo=JSON.stringify(S);
+const T={"key": {"e": "🧭", "t": "Key words", "n": "Core pronouns, question words and verbs. 'Tu/Tou' is informal – with elders use the respectful form.", "r": [["I", "मैं", "Hum", "Ham", "Hum"], ["He / She", "वह", "Uoo", "U", "Oo"], ["You (informal)", "तुम", "Tou", "Tu", "Tu"], ["You (respectful)", "आप", "Aapna", "", "Tohar / -hu forms"], ["What", "क्या", "Ki", "Kathi", "Kauchi / Ka"], ["Why", "क्यों", "Kathilah / Kainah", "Kathila", "Kahela"], ["How", "कैसे", "Kainah", "Kaeese", "Kaise"], ["Where", "कहाँ", "Kahan", "Kanha / Kenne", "Kaha"], ["Which", "कौन-सा", "Kaun", "Kon", "Kon"], ["Your", "तुम्हारा", "Toharo", "Tohar", "Tohar"], ["Yes", "हाँ", "Haan", "Ha", "Haa"], ["No", "नहीं", "Naay", "Na", "Na"], ["Come", "आओ", "Aaooni", "Aa", "Aau"], ["Sit", "बैठो", "Baithni", "Baith", "Baith"], ["Eat", "खाओ", "Khooni", "Kho", "Kho"], ["Go", "जाओ", "Joni", "Jo", "Jo"], ["Walk", "चलो", "Chalni", "Chal", "Chal"], ["Drink", "पियो", "Peele", "Pi", "Peele"], ["Run", "दौड़ो", "Daud", "Daud", "Daur"]]}, "greet": {"e": "🙏", "t": "Greetings", "n": "", "r": [["How are you?", "आप कैसे हैं?", "Toharo ki haal?", "Tu kaisan chhe?", "Kaisan hen?"], ["I am fine.", "मैं ठीक हूँ।", "Hammein theek chhiye.", "Ham thik chhi.", "Hum theek hai."], ["What is your name?", "आपका नाम क्या है?", "Toharo naam ki choh?", "Tohar kathi naam hau?", "Tohar naam kauchi hau?"], ["Did you have lunch?", "दोपहर का खाना खाया?", "Ki toinh dopahar ke khana khailo?", "Tu dupahar ke khana kha lelahi?", "Tu duphar ke khana khaini?"]]}, "fam": {"e": "👨‍👩‍👧", "t": "With family", "n": "", "r": [["Will you come with me?", "मेरे साथ आओगे?", "Ki toih hamra saathein aibho?", "Tu hamra sathe aaibe ki?", "Tu hamra saath aime?"], ["I shall come with you.", "मैं तुम्हारे साथ आऊँगा।", "Hamme tohra saathein aaibha.", "Ham tora sathe abau.", "Hum tohra saath aibau."], ["Will you give me your pen?", "अपनी कलम दोगे?", "Ki toinh aapno kalam hamra debho?", "Tu appan kalam hamra debe?", "Tu apan kalamiya hamra deme?"], ["Can you give me your pen?", "क्या तुम अपनी कलम दे सकते हो?", "Ki toinh aapno kalam hamara diyein paarein?", "Tu appan kalam hamra de sakai chhe?", "Tu apan kalamiya hamara de sakle hen?"], ["Yes, of course.", "हाँ, ज़रूर।", "Haan, zaroor.", "Ha jarur.", "Haa, jaroor."], ["Do you love me?", "क्या तुम मुझसे प्यार करते हो?", "Ki Toinh hamra pyar karein chhay?", "Tu hamra se pyaar karai chhe?", "Tu hamra se prem karahen?"], ["Yes, I love you.", "हाँ, मैं तुमसे प्यार करता हूँ।", "Haan, hamme tohra pyar karein chhiyo.", "Ha, ham tora se pyar karai chhiyau.", "Haa, hum tohra se prem kara hu."], ["No, I don't love you.", "नहीं, मैं तुमसे प्यार नहीं करता।", "Naay, hamme tohra pyar naay karay chhiyo.", "Na, ham tora se pyar na karaichhiyau.", "Na, hum tohra se prem na kara hu."], ["Can you lift the box?", "क्या तुम डिब्बा उठा सकते हो?", "Ki toinh baksha uthabe paarein?", "Tu baksa utha sakai chhe ki?", "Boxwa tu utha demi?"]]}, "kin": {"e": "🧓", "t": "Relatives", "n": "Sources differ by caste, village and generation. Blank = no source found – ask family and tap ✏️ to fill it in.", "r": [["Father", "पिता", "Baap / Babu", "Babu", "Babu / Bau"], ["Mother", "माँ", "Maai / Mon", "Mai / Matari", "Ma / Mata"], ["Paternal grandfather", "दादा", "Baba / Dada", "Baba / Dada", "Baba / Dada"], ["Paternal grandmother", "दादी", "Dadi", "Dai / Dadi", ""], ["Maternal grandfather", "नाना", "Nana", "Nana", ""], ["Maternal grandmother", "नानी", "Nani", "Nani", ""], ["Father's brother (uncle)", "चाचा / काका", "Kaka (elder) / Chacha", "Kaka / Chacha", ""], ["Father's brother's wife", "चाची / काकी", "Kaki", "Kaki / Chachi", ""], ["Maternal uncle", "मामा", "Mama", "Mama", "Mama"], ["Maternal uncle's wife", "मामी", "", "Mami", "Mami / Mamani"], ["Father's sister", "बुआ", "", "Phua", "Phua / Phuphu"], ["Mother's sister", "मौसी", "Mausi", "", ""], ["Elder brother", "बड़े भैया", "Bhaiya", "Bhaiya", "Bhaiya / Bhajja"], ["Younger brother", "छोटा भाई", "Bhai", "Bhai", "Bhai / Bhajba"], ["Elder sister", "दीदी", "Didi", "Didi / Bahin", "Didi / Bahin"], ["Younger sister", "छोटी बहन", "Bahin", "Bahin", ""], ["Son", "बेटा", "Beta", "Beta", ""], ["Daughter", "बेटी", "Beti", "Beti", ""], ["Husband's elder brother", "जेठ", "", "Bhainsur", "Jeth / Bhesur"], ["Husband's younger brother", "देवर", "Deor", "Deor", ""], ["Husband's sister", "ननद", "Nanad", "Nanad", "Nand / Nanad"], ["Wife's brother", "साला", "Sala / Sarau", "Sala", "Sara / Sala"], ["Wife's sister", "साली", "Sali", "Sali", "Sari / Sali"], ["Father-in-law", "ससुर", "Sasur", "Sasur", ""], ["Mother-in-law", "सास", "Sas", "Sas", "Sas / Saus"], ["Son's wife", "बहू", "", "", "Putohu / Bahu"], ["Daughter's husband", "दामाद", "", "Damad", "Pahuna / Damad"], ["Brother's son (nephew)", "भतीजा", "", "Bhatija", "Bhatija"]]}, "ask": {"e": "❓", "t": "Questions", "n": "", "r": [["Why did you come?", "तुम क्यों आए?", "Tau kathilah aaylo cheleh?", "Tu kathi la aile ha?", "Kahela aile hal?"], ["How did you come?", "तुम कैसे आए?", "Tau kainah aayle?", "Tu kaeese ailahi?", "Kaise ailin?"], ["Where did you sleep?", "तुम कहाँ सोए?", "Tau kahan suttalo cheleh?", "Tu kenne sutalahi?", "Kaha sutlahin?"], ["Where did you come from?", "तुम कहाँ से आए?", "Tau kahan sah aayloh cheh?", "Tu kanha se abai chhahi?", "Kaha se aawith hai?"], ["Where should I go?", "मैं कहाँ जाऊँ?", "Hummah kahan jaiyah?", "Hamra kanha jae ke chahi?", "Hamra kaha jai ke chahi?"], ["Which way did you come?", "किस रास्ते से आए?", "Kaun rasta sah tau aayleh?", "Tu kon rasta se ailahi?", "Kon rastaiya se alhin?"], ["How much did he pay you?", "उसने तुम्हें कितना दिया?", "Uoo tohra kitna delko?", "U tora ketana paisa delau?", "Oo tora ketna paisa delkau?"], ["What did you do?", "तुमने क्या किया?", "Tau ki kari dehleh?", "Tu kathi kaile?", "Tu kauchi kani?"], ["What should I do?", "मैं क्या करूँ?", "Hummara ki karma chahiyo?", "Ham kathi karu?", "Hame kauchi kari?"], ["Which is your favourite colour?", "तुम्हारा पसंदीदा रंग कौन-सा है?", "Toharo pasandida rang kaun toh choh?", "Tohar pasandida rang kon hau?", "Tora kon rang pasand hau?"], ["How was the journey yesterday?", "कल का सफ़र कैसा रहा?", "Kal ke safar kainoh cheloh?", "Kalhe ke safar kaisan ralai?", "Kal ke jatra kaisan rahlau?"]]}, "tense": {"e": "⏳", "t": "Past & future", "n": "Spot the endings: future -teh / -tai; past -lke / -lakai / -lkai.", "r": [["He is eating an apple.", "वह सेब खा रहा है।", "Uoo ago seb khay raho che.", "U seb kha rahal hai.", "Oo seu khait hai."], ["He ate an apple.", "उसने सेब खाया।", "Uoo ago seb khailke.", "U seb kha lelakai.", "Oo seu khail kai."], ["He has eaten.", "उसने खा लिया है।", "Uoo khay lelkey.", "U kha lelakai.", "Oo kha lelkai."], ["He had eaten.", "उसने खा लिया था।", "Uoo khaiy lela cheh.", "U kha lele rahalai.", "Oo kha lelke hal."], ["He slept the whole night.", "वह रात भर सोया।", "Uoo raat bhar suttalo cheleh.", "U rat bhar sutalai.", "Oo raat bhar sutalkai."], ["She came by bus yesterday.", "वह कल बस से आई।", "Uoo kal bus se aailey.", "U kalhe bas se alai.", "Oo kalhe bus se ailai."], ["He will eat.", "वह खाएगा।", "Uoo khaiyteh.", "U khatai.", "Oo khaitai."], ["He will go.", "वह जाएगा।", "Uoo jaiyteh.", "U jatai.", "Oo jaitai."], ["He will come.", "वह आएगा।", "Uoo aaiyteh.", "U atai.", "Oo aitai."]]}};
+const LN=[{n:'Angika',s:'Anga · Bhagalpur',c:'#ff9f1c',j:2,a:'https://languageshome.com/English-Angika.htm'},
+{n:'Bajjika',s:'Muzaffarpur · Vaishali',c:'#2ec4b6',j:3,a:'https://www.languageshome.com/English-Bajjika.htm'},
+{n:'Magahi',s:'Patna · Gaya',c:'#ff4d6d',j:4,a:'https://www.languageshome.com/English-Magahi.htm'}];
+const FACTS=["Angika is also called Anga, or 'Chhika-Chhiki' – the nickname comes from its words for 'is' (chhik).",
+"Bajjika is spoken mainly in Muzaffarpur, Vaishali, Sitamarhi, Samastipur and the champaran districts – and in Nepal's Terai.",
+"Magahi (Magadhi) comes from the old Magadha region – Patna, Gaya, Nalanda.",
+"Magahi has three levels of 'you': informal, honorific and high-honorific. Use the respectful forms with elders.",
+"All three are close cousins of Maithili – learn one and the others get easier.",
+"The future ending is the easiest pattern to spot: Angika -teh, Bajjika/Magahi -tai."];
+const KEY='bolo2';
+let S;try{S=JSON.parse(localStorage[KEY]||localStorage.bolo||'null')}catch(e){S=null}
+S=Object.assign({xp:0,streak:0,day:'',box:{},ed:{},li:0},S||{});delete S.mast;
+const save=()=>{try{localStorage[KEY]=JSON.stringify(S)}catch(e){}};
 const today=()=>new Date().toDateString();
-if(S.day!=today()){let y=new Date(Date.now()-864e5).toDateString();S.streak=S.day==y?S.streak:0;}
-let li=0,view='home',topic=null,idx=0,flipped=false,qs=0,qn=0,qdone=false;
-const col=()=>LN[li][2];
-const txt=(k,j,l)=>S.ed[k+'_'+j+'_'+l]||T[k][2][j][l];
-const toast=m=>{let t=document.getElementById('toast');t.textContent=m;t.className='s';setTimeout(()=>t.className='',1200)};
-function xp(n){S.xp+=n;if(S.day!=today()){S.day=today();S.streak++}save()}
-function bar(){return `<div class=bar><div class=logo>बोलो<span>.</span></div><div><span class=pill>🔥 ${S.streak}</span><span class=pill>⭐ ${S.xp}</span></div></div>`}
-function tabs(){return `<div class=tabs>`+LN.map((l,i)=>`<div class="tab ${i==li?'on':''}" style="--lc:${l[2]}" onclick="li=${i};view='home';draw()">${l[0]}<small>${l[1].split(' · ')[0]}</small></div>`).join('')+`</div>`}
-function mastery(k){let n=T[k][2].length,m=0;for(let i=0;i<n;i++)if(S.mast[k+i+'_'+li])m++;return m/n*100}
-function draw(){let a=document.getElementById('app');document.body.style.setProperty('--lc',col());a.style.setProperty('--lc',col());
-let h=bar()+tabs()+`<div class=border></div>`;
-if(view=='home'){
- h+=`<div class=grid>`+Object.keys(T).map(k=>`<div class=tile style="--lc:${col()}" onclick="topic='${k}';view='learn';idx=0;flipped=false;draw()"><div class=e>${T[k][0]}</div><b>${T[k][1]}</b><small>${T[k][2].length} phrases</small><div class=prog><i style="width:${mastery(k)}%"></i></div></div>`).join('')+`
- <div class=tile style="--lc:${col()}" onclick="view='cmp';draw()"><div class=e>⚖️</div><b>Compare</b><small>all 3 side by side</small></div></div>
- <div class=fact>💡 ${FACTS[(new Date().getDate())%FACTS.length]}</div>
- <div class=fact style="border-color:var(--a)">Text is romanised from languageshome.com (native-speaker audio is on their site). Dialects vary by village – tap ✏️ on a card to fix it with your family's version.</div>`}
-if(view=='learn'||view=='quiz'){h+=`<span class=back-b onclick="view='home';draw()">← Back</span> <b>${T[topic][1]}</b>`;
- let it=T[topic][2];
- if(view=='learn'){let r=it[idx];
- h+=`<div class=top><span>${idx+1} / ${it.length}</span><span>${LN[li][0]}</span></div>
- <div class="flip ${flipped?'f':''}" onclick="flipped=!flipped;if(flipped&&!S.mast[topic+idx+'_'+li]){S.mast[topic+idx+'_'+li]=1;xp(5);toast('+5 XP')}draw()"><div class=fi>
- <div class="face front"><div class=hi>${r[1]}</div><div class=en>${r[0]}</div><div class=en style="margin-top:20px;font-size:13px">tap to reveal ${LN[li][0]}</div></div>
- <div class="face back"><div class=ans>${txt(topic,idx,LN[li][3])}</div><div class=alt>${LN.map(l=>l[0].slice(0,3)+': '+txt(topic,idx,l[3])).filter((_,i)=>i!=li).join('  ·  ')}</div></div></div></div>
- <div style="text-align:center;margin-top:12px"><button class="btn g" onclick="idx=(idx+it.length-1)%it.length;flipped=false;draw()">◀</button>
- <button class="btn g" onclick="ed()">✏️</button><button class=btn onclick="idx=(idx+1)%it.length;flipped=false;draw()">Next ▶</button></div>
- <div style="text-align:center;margin-top:10px"><button class=btn onclick="view='quiz';qs=0;qn=0;qdone=false;newq();draw()">🎯 Quiz me</button></div>`}
- else{h+=quizHTML()}}
-if(view=='cmp'){h+=`<span class=back-b onclick="view='home';draw()">← Back</span><b> Compare</b>`;
- Object.keys(T).forEach(k=>{h+=`<h3>${T[k][0]} ${T[k][1]}</h3>`;T[k][2].forEach((r,j)=>{h+=`<div class=cmp><div style="font-weight:700">${r[1]} <span style="color:var(--mut);font-weight:400">· ${r[0]}</span></div>`+LN.map(l=>`<div class=row><span class=l style="background:${l[2]}">${l[0].slice(0,3).toUpperCase()}</span><span>${txt(k,j,l[3])}</span></div>`).join('')+`</div>`})})}
-a.innerHTML=h}
-function ed(){let l=LN[li][3];let v=prompt('Your family\'s version of "'+T[topic][2][idx][0]+'":',txt(topic,idx,l));if(v){S.ed[topic+'_'+idx+'_'+l]=v;save();draw()}}
-let q;function newq(){let it=T[topic][2];let a=Math.floor(Math.random()*it.length),o=[a];let g=0;while(o.length<Math.min(4,it.length)&&g++<50){let r=Math.floor(Math.random()*it.length);if(!o.includes(r))o.push(r)}o.sort(()=>Math.random()-.5);q={a,o,done:null}}
-function quizHTML(){if(qn>=8)return `<div class=card style="text-align:center"><div style="font-size:50px">🏆</div><h2>${qs} / ${qn}</h2><button class=btn onclick="qs=0;qn=0;newq();draw()">Again</button><button class="btn g" onclick="view='learn';draw()">Cards</button></div>`;
- let it=T[topic][2];return `<div class=top><span>Question ${qn+1}/8</span><span>Score ${qs}</span></div><div class=card><div class=en>How do you say…</div><div class=hi>${it[q.a][1]}</div><div class=en>${it[q.a][0]}</div></div>`+
- q.o.map(r=>`<button class="opt ${q.done!=null?(r==q.a?'ok':(r==q.done?'no':'')):''}" ${q.done!=null?'disabled':''} onclick="pick(${r})">${txt(topic,r,LN[li][3])}</button>`).join('')+(q.done!=null?`<button class=btn onclick="qn++;newq();draw()">Continue</button>`:'')}
-function pick(r){q.done=r;if(r==q.a){qs++;xp(10);toast('✔ +10 XP')}else toast('✖ Not quite');draw()}
-draw()
-</script></html>
+if(S.day&&S.day!=today()&&S.day!=new Date(Date.now()-864e5).toDateString())S.streak=0;
+let li=S.li||0,view='home',topic='',idx=0,flipped=false,Q=null,dp=null,search='';
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const L=()=>LN[li];
+const txt=(k,i,j=L().j)=>S.ed[k+'_'+i+'_'+j]||T[k].r[i][j]||'';
+const kk=(k,i)=>k+'_'+i+'_'+li;
+const toast=m=>{let t=document.getElementById('toast');t.textContent=m;t.className='s';clearTimeout(toast.h);toast.h=setTimeout(()=>t.className='',1300)};
+function xp(n){S.xp+=n;if(S.day!=today()){let y=new Date(Date.now()-864e5).toDateString();S.streak=(S.day==y?S.streak:0)+1;S.day=today()}save()}
+const avail=k=>T[k].r.map((_,i)=>i).filter(i=>txt(k,i));
+const mastery=k=>{let a=avail(k);return a.length?a.reduce((s,i)=>s+Math.min(3,S.box[kk(k,i)]||0),0)/(a.length*3)*100:0};
+function bar(){return `<div class=bar><div class=logo>बोलो<span>.</span></div><div><button class=pill onclick="view='info';draw()" aria-label=Menu>⚙️</button><span class=pill>🔥 ${S.streak}</span><span class=pill>⭐ ${S.xp}</span></div></div>`}
+function tabs(){return `<div class=tabs role=tablist>`+LN.map((l,i)=>`<button role=tab aria-selected="${i==li}" class="tab ${i==li?'on':''}" style="--tc:${l.c}" onclick="li=${i};S.li=li;save();view='home';draw()">${l.n}<small>${l.s.split(' · ')[0]}</small></button>`).join('')+`</div>`}
+let deferred=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;if(view=='home')draw()});
+addEventListener('appinstalled',()=>{deferred=null;toast('Installed ✔');draw()});
+const standalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone;
+const isIOS=()=>/iphone|ipad|ipod/i.test(navigator.userAgent);
+function installBanner(){if(standalone())return '';
+ if(deferred)return `<div class=inst><span>📲 Install Bolo on your phone</span><button class=btn style="margin:0;padding:8px 14px" onclick="doInstall()">Install</button></div>`;
+ return `<div class=inst><span>📲 ${isIOS()?'iPhone: Share ⎋ → Add to Home Screen':'Install: browser menu ⋮ → Install app'}</span></div>`}
+async function doInstall(){if(!deferred)return;deferred.prompt();await deferred.userChoice;deferred=null;draw()}
+function draw(){let a=document.getElementById('app');a.style.setProperty('--lc',L().c);
+ let h=bar()+tabs()+`<div class=border></div>`;
+ if(view=='home')h+=home();else if(view=='learn')h+=learn();else if(view=='quiz')h+=quiz();else if(view=='cmp')h+=cmp();else if(view=='info')h+=info();
+ a.innerHTML=h;window.scrollTo(0,0);if(view=='cmp'){let s=document.getElementById('q');if(s&&search){s.focus();s.setSelectionRange(search.length,search.length)}}}
+function home(){let h=installBanner()+`<div class=grid><button class="tile wide" onclick="startQuiz(null)"><div style="font-size:36px">🎯</div><div><b>Daily practice</b><small>8 quick questions · weakest words first</small></div></button>`;
+ Object.keys(T).forEach(k=>{h+=`<button class=tile onclick="topic='${k}';view='learn';idx=0;flipped=false;draw()"><div class=e>${T[k].e}</div><b>${T[k].t}</b><small>${avail(k).length} cards</small><div class=prog><i style="width:${mastery(k)}%"></i></div></button>`});
+ h+=`<button class=tile style="grid-column:span 2" onclick="view='cmp';search='';draw()"><div class=e>⚖️</div><b>Compare</b><small>all 3 side by side</small></button></div>
+ <div class=fact>💡 ${FACTS[new Date().getDate()%FACTS.length]}</div>
+ <div class=fact style="border-color:var(--a)">Romanised spellings vary from village to village. See something different from what your family says? Tap ✏️ on a card and save their version.</div>`;return h}
+function learn(){let it=avail(topic),h=`<button class=back-b onclick="view='home';draw()">← Back</button> <b>${T[topic].e} ${T[topic].t}</b>`;
+ if(!it.length)return h+`<div class=empty>Nothing in ${L().n} yet for this topic.<br>Ask family and add words from Compare.</div>`;
+ if(idx>=it.length)idx=0;let i=it[idx],r=T[topic].r[i];
+ h+=`<div class=top><span>${idx+1} / ${it.length}</span><span>${L().n}</span></div>
+ <div class="flip ${flipped?'f':''}" onclick="flipCard()" role=button tabindex=0 aria-label="Flip card"><div class=fi>
+ <div class="face front"><div class=hi>${esc(r[1])}</div><div class=en>${esc(r[0])}</div><div class=hint>tap to reveal ${L().n}</div></div>
+ <div class="face back"><div class=ans>${esc(txt(topic,i))}</div><div class=alt>${LN.filter((_,q)=>q!=li).map(l=>`<div><b>${l.n.slice(0,3).toUpperCase()}</b> ${esc(txt(topic,i,l.j))||'—'}</div>`).join('')}</div></div></div></div>
+ <div style="text-align:center;margin-top:12px"><button class="btn g" aria-label=Previous onclick="idx=(idx+it.length-1)%it.length;flipped=false;draw()">◀</button>
+ <button class="btn g" aria-label=Edit onclick="ed(${i})">✏️</button><button class=btn onclick="idx=(idx+1)%it.length;flipped=false;draw()">Next ▶</button></div>
+ <div style="text-align:center"><button class=btn onclick="startQuiz('${topic}')">🎯 Quiz this topic</button></div>`;
+ if(T[topic].n)h+=`<div class=fact>${esc(T[topic].n)}</div>`;
+ h+=`<div class=fact style="border-color:var(--c)">🔊 Hear a native speaker: <a href="${L().a}" target=_blank rel=noopener>${L().n} audio on languageshome.com</a></div>`;return h}
+function flipCard(){flipped=!flipped;if(flipped){let k=kk(topic,avail(topic)[idx]);if(S.box[k]==null){S.box[k]=0;xp(2)}}draw()}
+function ed(i){let r=T[topic].r[i],v=prompt('Your family\'s '+L().n+' for "'+r[0]+'":',txt(topic,i));if(v!==null){v=v.trim();let key=topic+'_'+i+'_'+L().j;if(v)S.ed[key]=v;else delete S.ed[key];save();toast('Saved on this device');draw()}}
+function startQuiz(k){let pool=[];(k?[k]:Object.keys(T)).forEach(t=>avail(t).forEach(i=>pool.push([t,i])));
+ if(pool.length<4){toast('Not enough cards yet');return}
+ pool.sort((a,b)=>(S.box[kk(...a)]||0)-(S.box[kk(...b)]||0)+(Math.random()-.5)*1.6);
+ Q={k,pool,n:0,s:0,cur:null,done:null};topic=k||'';nextQ();view='quiz';draw()}
+function nextQ(){let [t,i]=Q.pool[Q.n%Q.pool.length],rev=Math.random()<.4;let r=T[t].r[i];
+ let ans=rev?r[0]:txt(t,i),opts=new Set([ans]),g=0;
+ while(opts.size<4&&g++<200){let [t2,i2]=Q.pool[Math.floor(Math.random()*Q.pool.length)];let o=rev?T[t2].r[i2][0]:txt(t2,i2);if(o)opts.add(o)}
+ Q.cur={t,i,rev,ans,opts:[...opts].sort(()=>Math.random()-.5)};Q.done=null}
+function quiz(){let h=`<button class=back-b onclick="view='home';draw()">← Quit</button>`;
+ if(Q.n>=8)return h+`<div class=card style="text-align:center"><div style="font-size:54px">${Q.s>=7?'🏆':Q.s>=4?'👏':'💪'}</div><h2>${Q.s} / 8</h2><button class=btn onclick="startQuiz(${Q.k?`'${Q.k}'`:'null'})">Again</button><button class="btn g" onclick="view='home';draw()">Home</button></div>`;
+ let c=Q.cur,r=T[c.t].r[c.i];
+ h+=`<div class=top><span>Question ${Q.n+1}/8</span><span>Score ${Q.s}</span></div><div class=card>`+
+ (c.rev?`<div class=en>What does this mean? (${L().n})</div><div class=hi>${esc(txt(c.t,c.i))}</div>`:`<div class=en>How do you say… (${L().n})</div><div class=hi>${esc(r[1])}</div><div class=en>${esc(r[0])}</div>`)+`</div>`+
+ c.opts.map((o,n)=>`<button class="opt ${Q.done!=null?(o==c.ans?'ok':(n==Q.done?'no':'')):''}" ${Q.done!=null?'disabled':''} onclick="pick(${n})">${esc(o)}</button>`).join('');
+ if(Q.done!=null)h+=`<div style="text-align:center"><button class=btn onclick="Q.n++;if(Q.n<8)nextQ();draw()">Continue</button></div>`;return h}
+function pick(n){let c=Q.cur;Q.done=n;let k=kk(c.t,c.i);if(c.opts[n]==c.ans){Q.s++;S.box[k]=Math.min(3,(S.box[k]||0)+1);xp(10);toast('✔ +10 XP')}else{S.box[k]=0;save();toast('✖ '+c.ans)}draw()}
+function cmp(){let h=`<button class=back-b onclick="view='home';draw()">← Back</button><b> ⚖️ Compare</b><input id=q class=s placeholder="Search Hindi or English…" value="${esc(search)}" oninput="search=this.value;draw()">`,s=search.toLowerCase(),n=0;
+ Object.keys(T).forEach(k=>{let rows='';T[k].r.forEach((r,i)=>{if(s&&!(r[0]+r[1]+r.slice(2).join(' ')).toLowerCase().includes(s))return;n++;
+ rows+=`<div class=cmp><div style="font-weight:700">${esc(r[1])} <span style="color:var(--mut);font-weight:400">· ${esc(r[0])}</span></div>`+LN.map(l=>`<div class=row><span class=l style="background:${l.c}">${l.n.slice(0,3).toUpperCase()}</span><span>${esc(txt(k,i,l.j))||'<span style=opacity:.4>— ask family</span>'}</span></div>`).join('')+`</div>`});
+ if(rows)h+=`<h3>${T[k].e} ${T[k].t}</h3>`+rows});
+ if(!n)h+=`<div class=empty>No match</div>`;return h}
+function info(){return `<button class=back-b onclick="view='home';draw()">← Back</button><h3>📲 Install on your phone</h3><div class=card>
+ <b>Android (Chrome)</b><br>Menu ⋮ → <i>Install app</i> (or <i>Add to Home screen</i>).<br><br>
+ <b>iPhone (Safari)</b><br>Share ⎋ → <i>Add to Home Screen</i>.<br><br>
+ After installing, Bolo opens full-screen and works offline.</div>
+ <h3>🔄 Family corrections</h3><div class=card>Corrections you make with ✏️ stay on this phone.<br>
+ <button class=btn onclick="exp()">Copy my corrections</button><button class="btn g" onclick="imp()">Paste corrections</button></div>
+ <h3>📚 Sources</h3><div class=card style="font-size:14px;line-height:1.5">
+ Phrases &amp; words: <a href="https://www.languageshome.com/English-Angika.htm" target=_blank rel=noopener>languageshome.com</a> (Angika, Bajjika, Magahi).<br>
+ Relatives: Roy (2010) Bajjika table via Nepal govt. paper; Suman &amp; Mhaiskar (2023) <i>Kinship terms in Bhojpuri, Maithili and Magahi</i>; Angika Wikipedia.<br>
+ Hindi lines were written by the app author.<br><br>
+ <b>Limits:</b> spellings are romanised and vary by village; blanks mean no source found. Check with family.</div>
+ <h3>⚠️ Reset</h3><div class=card><button class="btn g" onclick="if(confirm('Erase XP, streak and progress?')){S.xp=0;S.streak=0;S.day='';S.box={};save();view='home';draw()}">Reset progress</button></div>`}
+function exp(){let t=JSON.stringify(S.ed);(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast('Copied – send it to Hermit'),()=>prompt('Copy this:',t))}
+function imp(){let t=prompt('Paste corrections:');if(!t)return;try{Object.assign(S.ed,JSON.parse(t));save();toast('Imported');draw()}catch(e){toast('Not valid')}}
+draw();
+if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js');
+</script></body></html>
