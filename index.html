@@ -76,6 +76,9 @@ const toast=m=>{let t=document.getElementById('toast');t.textContent=m;t.classNa
 function xp(n){S.xp+=n;if(S.day!=today()){let y=new Date(Date.now()-864e5).toDateString();S.streak=(S.day==y?S.streak:0)+1;S.day=today()}save()}
 const avail=k=>T[k].r.map((_,i)=>i).filter(i=>txt(k,i));
 const mastery=k=>{let a=avail(k);return a.length?a.reduce((s,i)=>s+Math.min(3,S.box[kk(k,i)]||0),0)/(a.length*3)*100:0};
+const lvl=(k,i)=>S.box[kk(k,i)];
+const stats=k=>{let a=avail(k),m=a.filter(i=>(lvl(k,i)||0)>=2).length,sn=a.filter(i=>lvl(k,i)!=null).length;return{n:a.length,m,sn}};
+const overall=()=>{let n=0,m=0,sn=0;Object.keys(T).forEach(k=>{let t=stats(k);n+=t.n;m+=t.m;sn+=t.sn});return{n,m,sn,p:n?Math.round(m/n*100):0}};
 function bar(){return `<div class=bar><div class=logo>बोलो<span>.</span></div><div><button class=pill onclick="view='info';draw()" aria-label=Menu>⚙️</button><span class=pill>🔥 ${S.streak}</span><span class=pill>⭐ ${S.xp}</span></div></div>`}
 function tabs(){return `<div class=tabs role=tablist>`+LN.map((l,i)=>`<button role=tab aria-selected="${i==li}" class="tab ${i==li?'on':''}" style="--tc:${l.c}" onclick="li=${i};S.li=li;save();view='home';draw()">${l.n}<small>${l.s.split(' · ')[0]}</small></button>`).join('')+`</div>`}
 let deferred=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;if(view=='home')draw()});
@@ -90,23 +93,27 @@ function draw(){let a=document.getElementById('app');a.style.setProperty('--lc',
  let h=bar()+tabs()+`<div class=border></div>`;
  if(view=='home')h+=home();else if(view=='learn')h+=learn();else if(view=='quiz')h+=quiz();else if(view=='cmp')h+=cmp();else if(view=='info')h+=info();
  a.innerHTML=h;window.scrollTo(0,0);if(view=='cmp'){let s=document.getElementById('q');if(s&&search){s.focus();s.setSelectionRange(search.length,search.length)}}}
-function home(){let h=installBanner()+`<div class=grid><button class="tile wide" onclick="startQuiz(null)"><div style="font-size:36px">🎯</div><div><b>Daily practice</b><small>8 quick questions · weakest words first</small></div></button>`;
- Object.keys(T).forEach(k=>{h+=`<button class=tile onclick="topic='${k}';view='learn';idx=0;flipped=false;draw()"><div class=e>${T[k].e}</div><b>${T[k].t}</b><small>${avail(k).length} cards</small><div class=prog><i style="width:${mastery(k)}%"></i></div></button>`});
+function home(){let o=overall(),h=installBanner()+`<div class=card style="padding:14px"><div class=top style="margin:0 0 8px"><b style="color:var(--ink)">${L().n} progress</b><span>${o.p}%</span></div><div class=prog style="margin:0"><i style="width:${o.p}%"></i></div><div class=top style="margin:8px 0 0"><span>👀 ${o.sn}/${o.n} seen</span><span>✅ ${o.m}/${o.n} learned</span></div></div><div class=grid><button class="tile wide" onclick="startQuiz(null)"><div style="font-size:36px">🎯</div><div><b>Daily practice</b><small>8 quick questions · weakest words first</small></div></button>`;
+ Object.keys(T).forEach(k=>{h+=`<button class=tile onclick="topic='${k}';view='learn';idx=0;flipped=false;draw()"><div class=e>${T[k].e}</div><b>${T[k].t}</b><small>${stats(k).m}/${stats(k).n} learned</small><div class=prog><i style="width:${mastery(k)}%"></i></div></button>`});
  h+=`<button class=tile style="grid-column:span 2" onclick="view='cmp';search='';draw()"><div class=e>⚖️</div><b>Compare</b><small>all 3 side by side</small></button></div>
  <div class=fact>💡 ${FACTS[new Date().getDate()%FACTS.length]}</div>
  <div class=fact style="border-color:var(--a)">Romanised spellings vary from village to village. See something different from what your family says? Tap ✏️ on a card and save their version.</div>`;return h}
 function learn(){let it=avail(topic),h=`<button class=back-b onclick="view='home';draw()">← Back</button> <b>${T[topic].e} ${T[topic].t}</b>`;
  if(!it.length)return h+`<div class=empty>Nothing in ${L().n} yet for this topic.<br>Ask family and add words from Compare.</div>`;
  if(idx>=it.length)idx=0;let i=it[idx],r=T[topic].r[i];
- h+=`<div class=top><span>${idx+1} / ${it.length}</span><span>${L().n}</span></div>
+ let st=stats(topic),lv=lvl(topic,i)||0;
+ h+=`<div class=top><span>Card ${idx+1} / ${it.length}</span><span>${'●'.repeat(lv)+'○'.repeat(3-lv)} ${lv>=2?'learned':lvl(topic,i)==null?'new':'learning'}</span></div>
+ <div class=prog style="margin:0 0 10px"><i style="width:${st.m/st.n*100}%"></i></div><div class=top style="margin:0 0 6px"><span>👀 ${st.sn}/${st.n} seen</span><span>✅ ${st.m}/${st.n} learned</span></div>
  <div class="flip ${flipped?'f':''}" onclick="flipCard()" role=button tabindex=0 aria-label="Flip card"><div class=fi>
  <div class="face front"><div class=hi>${esc(r[1])}</div><div class=en>${esc(r[0])}</div><div class=hint>tap to reveal ${L().n}</div></div>
  <div class="face back"><div class=ans>${esc(txt(topic,i))}</div><div class=alt>${LN.filter((_,q)=>q!=li).map(l=>`<div><b>${l.n.slice(0,3).toUpperCase()}</b> ${esc(txt(topic,i,l.j))||'—'}</div>`).join('')}</div></div></div></div>
- <div style="text-align:center;margin-top:12px"><button class="btn g" aria-label=Previous onclick="idx=(idx+it.length-1)%it.length;flipped=false;draw()">◀</button>
- <button class="btn g" aria-label=Edit onclick="ed(${i})">✏️</button><button class=btn onclick="idx=(idx+1)%it.length;flipped=false;draw()">Next ▶</button></div>
+ <div style="text-align:center;margin-top:12px"><button class="btn g" aria-label=Previous onclick="step(-1)">◀</button>
+ <button class="btn g" aria-label="Mark learned" onclick="know()">✅</button><button class="btn g" aria-label=Edit onclick="ed(${i})">✏️</button><button class=btn onclick="step(1)">Next ▶</button></div>
  <div style="text-align:center"><button class=btn onclick="startQuiz('${topic}')">🎯 Quiz this topic</button></div>`;
  if(T[topic].n)h+=`<div class=fact>${esc(T[topic].n)}</div>`;
  h+=`<div class=fact style="border-color:var(--c)">🔊 Hear a native speaker: <a href="${L().a}" target=_blank rel=noopener>${L().n} audio on languageshome.com</a></div>`;return h}
+function know(){let k=kk(topic,avail(topic)[idx]);S.box[k]=Math.max(2,S.box[k]||0);xp(3);toast('Marked learned');draw()}
+function step(d){let n=avail(topic).length;idx=(idx+d+n)%n;flipped=false;draw()}
 function flipCard(){flipped=!flipped;if(flipped){let k=kk(topic,avail(topic)[idx]);if(S.box[k]==null){S.box[k]=0;xp(2)}}draw()}
 function ed(i){let r=T[topic].r[i],v=prompt('Your family\'s '+L().n+' for "'+r[0]+'":',txt(topic,i));if(v!==null){v=v.trim();let key=topic+'_'+i+'_'+L().j;if(v)S.ed[key]=v;else delete S.ed[key];save();toast('Saved on this device');draw()}}
 function startQuiz(k){let pool=[];(k?[k]:Object.keys(T)).forEach(t=>avail(t).forEach(i=>pool.push([t,i])));
@@ -118,9 +125,9 @@ function nextQ(){let [t,i]=Q.pool[Q.n%Q.pool.length],rev=Math.random()<.4;let r=
  while(opts.size<4&&g++<200){let [t2,i2]=Q.pool[Math.floor(Math.random()*Q.pool.length)];let o=rev?T[t2].r[i2][0]:txt(t2,i2);if(o)opts.add(o)}
  Q.cur={t,i,rev,ans,opts:[...opts].sort(()=>Math.random()-.5)};Q.done=null}
 function quiz(){let h=`<button class=back-b onclick="view='home';draw()">← Quit</button>`;
- if(Q.n>=8)return h+`<div class=card style="text-align:center"><div style="font-size:54px">${Q.s>=7?'🏆':Q.s>=4?'👏':'💪'}</div><h2>${Q.s} / 8</h2><button class=btn onclick="startQuiz(${Q.k?`'${Q.k}'`:'null'})">Again</button><button class="btn g" onclick="view='home';draw()">Home</button></div>`;
+ if(Q.n>=8)return h+`<div class=card style="text-align:center"><div style="font-size:54px">${Q.s>=7?'🏆':Q.s>=4?'👏':'💪'}</div><h2>${Q.s} / 8</h2><div class=en>${L().n}: ${overall().p}% learned overall</div><br><button class=btn onclick="startQuiz(${Q.k?`'${Q.k}'`:'null'})">Again</button><button class="btn g" onclick="view='home';draw()">Home</button></div>`;
  let c=Q.cur,r=T[c.t].r[c.i];
- h+=`<div class=top><span>Question ${Q.n+1}/8</span><span>Score ${Q.s}</span></div><div class=card>`+
+ h+=`<div class=top><span>Question ${Q.n+1}/8</span><span>Score ${Q.s}</span></div><div class=prog style="margin:0 0 6px"><i style="width:${Q.n/8*100}%"></i></div><div class=card>`+
  (c.rev?`<div class=en>What does this mean? (${L().n})</div><div class=hi>${esc(txt(c.t,c.i))}</div>`:`<div class=en>How do you say… (${L().n})</div><div class=hi>${esc(r[1])}</div><div class=en>${esc(r[0])}</div>`)+`</div>`+
  c.opts.map((o,n)=>`<button class="opt ${Q.done!=null?(o==c.ans?'ok':(n==Q.done?'no':'')):''}" ${Q.done!=null?'disabled':''} onclick="pick(${n})">${esc(o)}</button>`).join('');
  if(Q.done!=null)h+=`<div style="text-align:center"><button class=btn onclick="Q.n++;if(Q.n<8)nextQ();draw()">Continue</button></div>`;return h}
